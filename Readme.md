@@ -32,7 +32,8 @@ $ tfenv install
 
 ### クレデンシャルの付与。
 AWSCLIを使用しても構いません。  
-なお、本連載では「AdministratorAccess」ポリシーをアタッチした IAM ユーザのアクセスキーを前提とします。
+「AdministratorAccess」ポリシーをアタッチした IAM ユーザのアクセスキーを前提とします。
+
 ```
 $ export AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxxx
 $ export AWS_SECRET_ACCESS_KEY=yyyyyyyyyyyyyyyyyy
@@ -51,6 +52,15 @@ $ touch main.tf
 ```
 
 ### awsに反映
+
+最初にバケット名だけ世界で一意の名前にしてください。  
+
+「S3.tf」を編集します。「bucket =」の箇所を全て書き換えてください。
+
+```
+bucket = 「一意の名前」
+
+```
 
 「terraform init」で初期化
 ```
@@ -157,7 +167,6 @@ $ terraform plan -var 'env=dev'
 ### リソースの削除
 
 ここまでで作成したリソースを削除しましょう。  
-今後の連載ではEC2は取り扱いません。
 
 ```
 $ terraform destroy
