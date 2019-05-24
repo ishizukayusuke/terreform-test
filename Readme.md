@@ -164,6 +164,22 @@ $ terraform plan -var 'env=prod'
 $ terraform plan -var 'env=dev'
 ```
 
+### モジュール化
+
+適当にディレクトリを切ってその配下に「main.tf」作成します。  
+iam_roleディレクトリのmain.tfとかみてみましょう。  
+
+そんでもってルートディレクトリのmain.tfの以下の記述でモジュールの呼び出しをしています。  
+```
+# モジュール[iam_role]呼出
+module "describe_regions_for_ec2" {
+  source     = "./iam_role"
+  name       = "describe-regions-for-ec2"
+  identifier = "ec2.amazonaws.com"
+  policy     = data.aws_iam_policy_document.allow_describe_regions.json
+}
+```
+
 ### リソースの削除
 
 ここまでで作成したリソースを削除しましょう。  
